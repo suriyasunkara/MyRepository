@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FeedBack Form</title>
+<script type="text/javascript">
+
+  function myFunction() {
+    var feed = document.forms[0];
+    var txt = "";
+    var i;
+    for (i = 0; i < feed.length; i++) {
+        if (feed[i].checked) 
+	{
+            txt = txt + feed[i].value + " ";
+        }
+    }
+    document.getElementById("fd").value = txt;
+}
+
+  var today = new Date();
+  var expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000); // plus 30 days
+  function setCookie(name, value)
+  {
+    document.cookie=name + "=" + escape(value) + "; path=/; expires=" + expiry.toGMTString();
+	
+  }
+  
+  function storeValues(form)  
+  {
+    setCookie("field1", form.fname.value);
+    setCookie("field2", form.profession.value);
+ var feed = document.forms[0];
+    var txt = "";
+    var i;
+    for (i = 0; i < feed.length; i++) {
+        if (feed[i].checked) 
+	{
+            setCookie("field3", form.txt.value);
+        }
+    }
+    setCookie("field4", form.rate.value);
+    return true;
+  }
+
+  var expired = new Date(today.getTime() - 24 * 3600 * 1000); // less 24 hours
+  function deleteCookie(name)
+  {
+    document.cookie=name + "=null; path=/; expires=" + expired.toGMTString();
+  }
+
+  function clearCookies()
+  {
+    deleteCookie("field1");
+    deleteCookie("field2");
+    deleteCookie("field3");
+    deleteCookie("field4");
+    alert('Your cookies have been deleted!');
+  }
+
+</script>
+</head>
+
+<body>
+<table align=center>
+<th><h2>FeedBack Form</h2></th>			
+  <form name="myForm" method="post" action="1a.html" onsubmit="return storeValues(this);">
+	<tr>
+	<td> Full Name:</td>
+	<td><input type="text" name="fname" pattern=[A-Za-z]* required></td>
+	</tr>
+
+	<tr>
+	<td>Profession:</td>
+	<td><select name="profession" required>
+		<option value="Student">Student</option>
+	    	<option value="Employee">Employee</option>
+	   	<option value="Self Employed">Self Employed</option>
+	   	<option value="Others" selected>Others</option>
+	</select></td>
+	</tr>
+	<tr>
+	<td>Major subjects in High School:</td>
+	<td><input type="checkbox" id="s1" name="subject1" value="English">English<br>
+		<input type="checkbox" id="s2" name="subject2" value="Physics">Physics<br>
+		<input type="checkbox" id="s3" name="subject3" value="Chemistry">Chemistry<br>
+		<input type="checkbox" id="s4" name="subject4" value="Mathematics">Mathematics<br>
+		<input type="checkbox" id="s5" name="subject5" value="Computer Science">Computer Science<br>
+	</td>
+	</tr>
+	<tr>
+		<td>Rate Us (between 1 and 5):</td>
+		<td><input type="number" name="rate" min="1" max="5" required></td>
+	</tr>
+	<tr><td colspan="2" align="center"><input type="button" onclick="myFunction()" value="Save The Details"></td></tr>
+	<tr>
+		<td>Summary:</td>
+		<td><textarea col=10 id="fd" disabled="true"></textarea></td>
+	</tr>
+	<tr><td align="right"><input type="submit" value="Submit" ></td>
+	     <td><input type="button" onclick="clearCookies();" value="Reset"></td>
+	</tr>
+	</table>
+  </form>
+</body>
+</html>

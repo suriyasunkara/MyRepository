@@ -1,0 +1,17 @@
+<script type="text/javascript">
+  function getCookie(name)
+  {	
+	var re=new RegExp(name+"=([^;]+)");
+	var value=re.exec(document.cookie);
+	return(value!=null)?unescape(value[1]):null;
+  }
+</script>
+
+<h4> Your FeedBack Received</h4>
+<ul>
+  <li>Name: <script type="text/javascript">document.write(getCookie("field1"));</script></li>
+  <li>Profession: <script type="text/javascript">document.write(getCookie("field2"));</script></li>
+  <li>Major Subjects in High School: <script type="text/javascript">document.write(getCookie("field3"));</script></li>
+  <li>Rate Us (between 1 and 5): <script type="text/javascript">document.write(getCookie("field4"));</script></li>
+</ul>
+
